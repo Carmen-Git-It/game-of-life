@@ -7,8 +7,15 @@ from build_grid import build_grid
 """
 BORDER = (0, 0, 0)  # black
 BACKGROUND = (255, 255, 255)  # white
-ALIVE = (60, 209, 71)  # green
-DEAD = (60, 100, 65)  # DEAD
+ALIVE = (17, 17, 109)  # ALIVE1
+ALIVE2 = (38, 38, 162)  # ALIVE2
+ALIVE3 = (93, 93, 216)  # ALIVE3
+ALIVE4 = (130, 130, 235)  # ALIVE4
+DEAD = (22, 136, 22)  # DEAD1
+DEAD2 = (47, 203, 47)  # DEAD2
+DEAD3 = (110, 255, 110)  # DEAD3
+DEAD4 = (142, 255, 142)  # DEAD4
+
 
 """
 ======== PYGAME SETUP ========
@@ -30,10 +37,22 @@ def draw_grid():
     """ Draws the grid."""
     for i in range(0, grid_width):
         for j in range(0, grid_height):
-            if grid.get_state(i, j):
-                pygame.draw.rect(screen, ALIVE, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
-            else:
+            if grid.get_state(i, j) == 1:  # First Dead Colour
                 pygame.draw.rect(screen, DEAD, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
+            elif grid.get_state(i, j) == 2:  # First Alive Colour
+                pygame.draw.rect(screen, ALIVE, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
+            elif grid.get_state(i, j) == 3:  # Second Dead Colour
+                pygame.draw.rect(screen, DEAD2, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
+            elif grid.get_state(i, j) == 4:  # First Alive Colour
+                pygame.draw.rect(screen, ALIVE2, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
+            elif grid.get_state(i, j) == 5:  # First Alive Colour
+                pygame.draw.rect(screen, DEAD3, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
+            elif grid.get_state(i, j) == 6:  # First Alive Colour
+                pygame.draw.rect(screen, ALIVE3, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
+            elif grid.get_state(i, j) % 2 == 0:  # Last Alive Colour
+                pygame.draw.rect(screen, ALIVE4, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
+            else:  # Last Dead Colour
+                pygame.draw.rect(screen, DEAD4, (i * tile_width, j * tile_height, tile_width, tile_height), 0)
 
     # Draw Labels
     label = myfont.render("{} generations have passed".format(game.get_steps()), 1, BORDER)
@@ -93,6 +112,6 @@ while not done:
     pygame.display.flip()
 
     # Loop Delay
-    clock.tick(15)
+    clock.tick(30)
 
 pygame.quit()

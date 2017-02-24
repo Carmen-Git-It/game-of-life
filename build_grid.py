@@ -20,9 +20,10 @@ def build_grid(width, height):
         if random.random() >= 0.8:
             x = floor(random.random() * width)
             y = floor(random.random() * height)
-            if not new_grid.get_state(x, y):
-                new_grid.set_cell(True, x, y)
+            if new_grid.get_state(x, y) != 2:
+                new_grid.set_cell(2, x, y)
                 alive_count += 1
+
         count += 1
     return new_grid
 

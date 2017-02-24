@@ -39,22 +39,32 @@ class GameOfLife:
         """
         left, right, bot, top = x_index - 1, x_index + 1, y_index - 1, y_index + 1
         alive_count = 0
+        current_state = self._grid.get_state(x_index, y_index)
         for i in range(left, right + 1):
             for j in range(bot, top + 1):
-                if self._grid.get_state(i, j) and (i != x_index or j != y_index):
+                if self._grid.get_state(i, j) % 2 == 0 and (i != x_index or j != y_index):
                     alive_count += 1
-        if alive_count < 2:
-            return False
-        elif alive_count > 3:
-            return False
-        elif alive_count == 3:
+
+        if alive_count < 2:  # Case: Less than 2 Neighbours
+            if current_state % 2 == 0:
+                return current_state + 1
+            else:
+                return current_state
+        elif alive_count > 3:  # Case: More than 3 Neighbours
+            if current_state % 2 == 0:
+                return current_state + 1
+            else:
+                return current_state
+        elif alive_count == 3:  # Case: Exactly 3 Neighbours
             self._generated_cells += 1
-            return True
-        else:
-            result = self._grid.get_state(x_index, y_index)
-            if result:
+            if current_state % 2 == 0:
+                return current_state
+            else:
+                return current_state + 1
+        else:  # Case: Exactly 2 Neighbours
+            if current_state % 2 == 0:
                 self._generated_cells += 1
-            return result
+            return current_state
 
     def step(self):
         """ Takes one step in the Game of Life"""

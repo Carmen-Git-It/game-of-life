@@ -1,3 +1,5 @@
+DEAD = 1
+
 class Cell:
     """ A cell for Game of Life, has state either alive or dead."""
 
@@ -5,7 +7,7 @@ class Cell:
         """ Initializes the Cell.
 
         @param Cell self: this Cell
-        @param bool state: the state of the cell, False = dead; True = alive
+        @param int state: the state of the cell, 1 = DEAD; 2 = ALIVE; 3 = DEAD; 4 = ALIVE; etc.
         @rtype: None
         """
         self._state = state
@@ -15,7 +17,7 @@ class Cell:
 
         @param Cell self: this Cell.
         """
-        if self._state == False:
+        if self._state < 2:
             return "-"
         else:
             return "Q"
@@ -24,5 +26,5 @@ class Cell:
         """ Returns the state of this cell.
 
         @param Cell self: this Cell
-        @rtype: bool"""
+        @rtype: int"""
         return self._state
