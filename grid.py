@@ -2,8 +2,9 @@ from cell import Cell
 
 DEAD = 1
 
+
 class Grid:
-    """ Stores a 2-dimensional array of Cells either alive or dead"""
+    """ Stores a 2-dimensional array of Cells either alive or dead."""
 
     def __init__(self, grid=None, width=10, height=10):
         """ Initializes the grid. If a grid is provided, ignores width and height values.
